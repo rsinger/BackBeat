@@ -1,0 +1,1 @@
+An "appropriate copy" music resolver service.

@@ -1,0 +1,14 @@
+{
+  "name": "BackBeat",
+  "description": "An appropriate copy service for music",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "~3.1.0",
+    "rdio-node": "git://github.com/monsur/rdio-node.git",
+    "niso-openurl": "git://github.com/talis/node-niso-openurl.git",
+    "spotify": "~0.2.0",
+    "coffee-script": "~1.6.2",
+    "async": "~0.2.6"
+  }
+}

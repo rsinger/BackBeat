@@ -1,0 +1,6 @@
+var config = require('./config.global');
+
+config.rdio = {};
+config.rdio.key = "";
+config.rdio.secret = "";
+module.exports = config;
