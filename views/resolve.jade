@@ -1,0 +1,48 @@
+extend layout
+block content
+  .row-fluid
+    .span12
+      h1 
+        a(href="/#{artist}") #{artist}
+        if (typeof album !== 'undefined')
+          | ::
+          a(href="/#{artist}/#{album}") #{album}
+        if (typeof track_title !== 'undefined')
+          |::
+          a(href="/#{artist}/#{album}/#{track_title}") #{track_title}
+  .row-fluid
+    .span2
+      ul.nav.nav-tabs.nav-stacked      
+        - var i = 0;
+        - var activesvc;
+        each results, svc in responses
+          if i === 0
+            - activesvc = svc;
+            li.active
+              a(href="#", class="svcSelect #{svc}") #{svc}
+              
+          else 
+            li
+              a(href="#", class="svcSelect #{svc}") #{svc}
+              
+          - i++
+            
+    .span10
+      - var row_visible;
+      each artists, svc in responses
+        
+        if activesvc == svc
+          - row_visible = 'show';
+        else
+          - row_visible = 'hide';
+        
+        each art in artists          
+          div(class="row #{row_visible} result result-#{svc}")
+            .span12
+              h2
+                a(href=art.url, target="_blank") #{art.name}
+              each result in art.results
+                if result.constructor.name === 'Track' 
+                  include includes/Track
+                else if result.constructor.name === 'Album'
+                  include includes/Album

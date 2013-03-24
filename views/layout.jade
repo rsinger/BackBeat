@@ -1,0 +1,19 @@
+!!!5
+html
+  head
+    title #{title.join(' :: ')} - BackBeat
+    script(src='http://code.jquery.com/jquery-1.9.1.min.js')    
+    script(src='/js/bootstrap.js')
+    link(rel='stylesheet', href='/css/bootstrap.css')
+    link(rel='stylesheet', href='/css/style.css')    
+  body
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container
+          a.brand BackBeat      
+    .container-fluid
+      block content
+    footer
+      p Using the Rdio and Spotify APIs
+      script(src='/js/backbeat.js')
+      

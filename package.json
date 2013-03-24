@@ -9,6 +9,7 @@
     "niso-openurl": "git://github.com/talis/node-niso-openurl.git",
     "spotify": "~0.2.0",
     "coffee-script": "~1.6.2",
-    "async": "~0.2.6"
+    "async": "~0.2.6",
+    "jade": "~0.28.2"
   }
 }

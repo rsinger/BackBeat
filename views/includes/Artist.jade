@@ -1,0 +1,10 @@
+append .row-fluid
+  div(class="row-fluid #{svc}")
+    .span9
+      dl.dl-horizontal
+        dt artist
+        dd 
+          a(href=art.url, target="_blank") #{art.name}
+    if art.image
+      .span2
+        img(src=art.image, width=100, height=100)

@@ -37,7 +37,7 @@ retrieveServicesFromRdio = (request, callback) ->
             else 
               results[result.artistKey].key = result.artistKey
               results[result.artistKey].name = result.artist
-              results[result.artistKey].url = "http://rdio.com" + result.url
+              results[result.artistKey].url = "http://rdio.com" + result.artistUrl
 
           if result.trackNum?
             album = new Album
