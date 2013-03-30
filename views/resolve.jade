@@ -3,12 +3,12 @@ block content
   .row-fluid
     .span12
       h1 
-        a(href="/#{artist}") #{artist}
+        a(href="/#{artist}") #{artist} 
         if (typeof album !== 'undefined')
-          | ::
-          a(href="/#{artist}/#{album}") #{album}
+          | :: 
+          a(href="/#{artist}/#{album}") #{album} 
         if (typeof track_title !== 'undefined')
-          |::
+          | :: 
           a(href="/#{artist}/#{album}/#{track_title}") #{track_title}
   .row-fluid
     .span2

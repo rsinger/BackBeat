@@ -5,11 +5,11 @@ var express = require('express'),
 
     
 var app = express();
-
+//app.use(express.cookieSession({secret:"Exile on Main Street"}));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
-
+app.use(express.cookieParser());
 app.get('/resolve', function(req, res){
 
 });
@@ -43,6 +43,12 @@ app.get('/:artist/:album', function(req,res){
 });
 
 app.get('/favicon.ico', function(req,res) {});
+
+app.get('/settings', function(req,res){
+  request = {title:["Settings"]};
+  res.render('settings',request);
+});
+
 app.get('/:artist', function(req,res){
   var request = new Request();
   request.artist = req.params.artist;
@@ -53,6 +59,11 @@ app.get('/:artist', function(req,res){
     request.responses = response;
     res.render('resolve', request);
   });
+});
+
+app.get('/', function(req,res){
+  request = {title:["Welcome"]};
+  res.render('welcome',request);
 });
 
 app.listen(process.env.PORT || 3000)
