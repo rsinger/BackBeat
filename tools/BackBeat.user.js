@@ -2,7 +2,7 @@
 // @name        BackBeat
 // @namespace   backbeat
 // @description An HTML snarfer for music data
-// @include     http*
+// @include     http://*
 // @require http://code.jquery.com/jquery-1.9.1.min.js
 // @require http://code.jquery.com/ui/1.10.2/jquery-ui.js
 // @require https://gitorious.org/microdatajs/microdatajs/blobs/raw/master/jquery.microdata.js
@@ -16,6 +16,39 @@ var items = $.microdata.json($(document).items(), function(o) { return o;});
 var artists = {};
 var match = false;
 var nextIsItem = false;
+var artName;
+var alName;
+function getArtistName(artistObj)
+{
+    var name;
+    if(artistObj.properties)
+    {
+        name = artistObj.properties.name[0];
+    } else if(artistObj.name)
+    {
+        name = artistObj.name
+    } else {
+        name = artistObj;
+    }
+    return $.trim(name);
+}
+
+function getAlbumName(albumObj)
+{
+    console.log(albumObj);
+    var name;
+    if(albumObj.properties)
+    {
+        name = albumObj.properties.name[0];
+    } else if(albumObj.name)
+    {
+        name = albumObj.name[0]
+    } else {
+        name = albumObj;
+    }
+    return $.trim(name);    
+}
+
 if(items.items.length > 0)
 {
   var item;
@@ -32,28 +65,29 @@ if(items.items.length > 0)
           match = true;
           if(types[i].properties)
           {
-            if(!artists[types[i].properties.byArtist[0].properties.name[0]])
-            {
-              artists[types[i].properties.byArtist[0].properties.name[0]] = {};
-            }
-            if(!artists[types[i].properties.byArtist[0].properties.name[0]][types[i].properties.name[0]])
-            {
-              artists[types[i].properties.byArtist[0].properties.name[0]][types[i].properties.name[0]] = [];
-            }
+            artName = getArtistName(types[i].properties.byArtist[0]);
+
           } else {
-            if(!artists[types[i].byArtist[0].properties.name[0]])
-            {
-              artists[types[i].byArtist[0].properties.name[0]] = {};
-            }
-            if(!artists[types[i].byArtist[0].properties.name[0]][types[i].name[0]])
-            {
-              artists[types[i].byArtist[0].properties.name[0]][types[i].name[0]] = [];
-            } 
+            artName = getArtistName(types[i].byArtist[0]);
           }
+          alName = getAlbumName(types[i]);
+          
+          if(artName)
+          {
+              if(!artists[artName])
+              {
+                  artists[artName] = {};
+              }
+              if(alName)
+              {
+                  if(!artists[artName][alName])
+                  {
+                      artists[artName][alName] = []
+                  }
+              }
+                  
+          }    
           nextIsItem = false;
-          // $('body').prepend('<a href="http://backbeat.herokuapp.com/' + encodeURIComponent(types[i].properties.byArtist[0].properties.name[0]) + '/' + encodeURIComponent(types[i].properties.name[0]) + '" target="_blank">BackBeat!</a>');
-          //console.log("ALBUM: " + types[i].properties.name[0] + " By:" + types[i].properties.byArtist[0].properties.name[0]);
-          // console.log(types[i].properties.byArtist[0].properties.name[0]);
         } else if(types[i][0] == "http://schema.org/MusicAlbum")
         {
           nextIsItem = true;
