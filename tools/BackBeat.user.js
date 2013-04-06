@@ -99,16 +99,17 @@ if(items.items.length > 0)
 //console.log(items);
 if(match)
 {
-  // GM_addStyle("#GM_BackBeatMenu { position: absolute; left: 1px; top: 50%; }");
-  $('head').append('<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />');
-  $('body').append('<ul id="GM_BackBeatMenu"><li>Backbeat!<ul id="GM_BackBeatArtistMenu"></ul></li></ul>');
+  $('head').append('<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">');
+  $('head').append('<link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">');
+  $('body').append('<div  id="GM_BackBeatMenu" class="btn-group"><a class="btn btn-mini btn-danger dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-music"></i> <span class="caret"></span></a><ul id="GM_BackBeatArtistMenu" class="dropdown-menu"></ul></li></ul></div>');
+  $('body').append('');
   var artCnt = 0;
   for(artist in artists)
   {
-    $('#GM_BackBeatArtistMenu').append('<li id="GM_BackBeatArtist_' +artCnt + '"><a href="http://backbeat.herokuapp.com/' + encodeURIComponent(artist) + '" target="_blank">' + artist + '</a></li>');
+    $('#GM_BackBeatArtistMenu').append('<li id="GM_BackBeatArtist_' +artCnt + '" class="dropdown-submenu"><a href="http://backbeat.herokuapp.com/' + encodeURIComponent(artist) + '" target="_blank">' + artist + '</a></li>');
     if(Object.keys(artists[artist]).length > 0)
     {
-        $('#GM_BackBeatArtist_' +artCnt).append('<ul id="GM_BackBeatArtist_' +artCnt + '_Albums"></ul>');
+        $('#GM_BackBeatArtist_' +artCnt).append('<ul id="GM_BackBeatArtist_' +artCnt + '_Albums" class="dropdown-menu"></ul>');
     }
     for(album in artists[artist])
     {
