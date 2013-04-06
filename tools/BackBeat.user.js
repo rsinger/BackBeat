@@ -4,7 +4,7 @@
 // @description An HTML snarfer for music data
 // @include     http://*
 // @require http://code.jquery.com/jquery-1.9.1.min.js
-// @require http://code.jquery.com/ui/1.10.2/jquery-ui.js
+// @require http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js
 // @require https://gitorious.org/microdatajs/microdatajs/blobs/raw/master/jquery.microdata.js
 // @require https://gitorious.org/microdatajs/microdatajs/blobs/raw/master/jquery.microdata.json.js
 // @require http://jsonpath.googlecode.com/svn/trunk/src/js/jsonpath.js
