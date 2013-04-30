@@ -5,6 +5,8 @@ append .row-fluid
         dt album
         dd 
           a(href=result.url, target="_blank") #{result.name}
+          if result.availability
+            p #{result.availability}
     if result.image
       .span2
         img(src=result.image, width=100, height=100)

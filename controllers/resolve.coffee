@@ -13,14 +13,14 @@ retrieveServicesFromRdio = (request, callback) ->
   if request.track_title?
     query.types = "Track"
     query.query = request.track_title
-    if request.artist? then query.query = query.query + " " + request.artist
+    if request.artist? then query.query = query.query + " " +  request.artist
   else if request.album?
     query.types = 'Album'
     query.query = request.album
-    if request.artist? then query.query = query.query + " " + request.artist
+    if request.artist? then query.query = query.query + " " +  request.artist
   else if request.artist?
     query.types = 'Artist'
-    query.query = request.artist
+    query.query =  request.artist
   rdio.makeRequest 'search', query, (err, response) =>
     results = {}
     if response.status? and response.status is "ok"
@@ -64,23 +64,24 @@ retrieveServicesFromRdio = (request, callback) ->
     else 
       callback null, results
 
-retrieveServicesFromSpotify = (request, callback) ->
+retrieveServicesFromSpotify = (request, attempt=0, callback) ->
   query = {}
   if request.track_title?
     query.type = "track"
-    query.query = "track:\"" + request.track_title + "\""
-    if request.artist? then query.query = query.query + " artist:\"" + request.artist + "\""
+    query.query = "track:\"" +  encodeURIComponent(request.track_title) + "\""
+    if request.artist? then query.query = query.query + " artist:\"" +  encodeURIComponent(request.artist) + "\""
   else if request.album?
     query.type = 'album'
     query.query = 'album:"'+request.album+'"'
-    if request.artist? then query.query = query.query + " artist:\"" + request.artist + "\""
+    if request.artist? then query.query = query.query + " artist:\"" +  encodeURIComponent(request.artist) + "\""
   else if request.artist?
     query.type = 'artist'
-    query.query = request.artist
-  
+    query.query =  encodeURIComponent(request.artist)
   spotify.search query, (err, response) =>
     if err
       console.log err
+      if attempt < 3
+        return retrieveServicesFromSpotify request, attempt + 1, callback
     results = {}
     if response? and response.info?
       if query.type is 'artist'
@@ -133,7 +134,7 @@ retrieveServicesForRequest = (request, callback) ->
   serviceResponses = {}
   retrieveServicesFromRdio request, (err, rdio_response) =>
     serviceResponses.rdio = rdio_response
-    retrieveServicesFromSpotify request, (err, spotify_response) =>
+    retrieveServicesFromSpotify request, 0, (err, spotify_response) =>
       serviceResponses.spotify = spotify_response
       callback null, serviceResponses
   
