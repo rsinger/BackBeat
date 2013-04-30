@@ -79,6 +79,8 @@ retrieveServicesFromSpotify = (request, callback) ->
     query.query = request.artist
   
   spotify.search query, (err, response) =>
+    if err
+      console.log err
     results = {}
     if response? and response.info?
       if query.type is 'artist'
