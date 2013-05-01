@@ -3,9 +3,9 @@
   "description": "An appropriate copy service for music",
   "version": "0.0.1",
   "private": true,
-  "engines":{
+  "engines": {
     "node": "0.8.x",
-    "npm":  "1.2.x"
+    "npm": "1.2.x"
   },
   "dependencies": {
     "express": "~3.1.0",
@@ -14,6 +14,7 @@
     "spotify": "~0.2.0",
     "coffee-script": "~1.6.2",
     "async": "~0.2.6",
-    "jade": "~0.28.2"
+    "jade": "~0.28.2",
+    "moment": "~2.0.0"
   }
 }
