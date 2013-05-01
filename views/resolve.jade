@@ -1,14 +1,14 @@
 extend layout
 block content
   .row-fluid
-    .span12
+    .span12.well
       h1 
         a(href="/#{artist}") #{artist} 
         if (typeof album !== 'undefined')
-          | :: 
+          | &raquo; 
           a(href="/#{artist}/#{album}") #{album} 
         if (typeof track_title !== 'undefined')
-          | :: 
+          | &raquo;  
           a(href="/#{artist}/#{album}/#{track_title}") #{track_title}
   .row-fluid
     .span2

@@ -8,6 +8,9 @@ append .row-fluid
         dt album
         dd 
           a(href=result.album.url, target="_blank") #{result.album.name}
+        if result.length
+          dt length
+          dd #{result.length}
         if result.album.availability
           dt Territories
             dd #{result.album.availability}

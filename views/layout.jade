@@ -9,8 +9,11 @@ html
   body
     .navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
-        .container
-          a.brand BackBeat      
+        .container-fluid
+          a.brand(href="/") BackBeat      
+          div.nav-collapse.collapse
+            p.navbar-text.pull-right
+              a(href="/settings").btn.btn-inverse Settings                
     .container-fluid
       block content
     footer

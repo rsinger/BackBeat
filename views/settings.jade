@@ -1,2 +1,22 @@
 extend layout
 block content
+  .row-fluid
+    .span12.well
+      h1 Settings
+  .row-fluid
+    .span1
+    .span11
+      h2 Services
+  .row-fluid
+    .span1
+    .span8
+      form.form-vertical(method='POST')
+        label.checkbox
+          input(type='checkbox', name='services-rdio', checked=(settings.services && settings.services.rdio))
+          | Rdio
+        label.checkbox
+          input(type='checkbox', name='services-spotify', checked=(settings.services && settings.services.spotify))
+          | Spotify
+        button(type='submit').btn.btn-primary Save        
+        
+      
