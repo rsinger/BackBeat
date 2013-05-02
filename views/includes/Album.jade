@@ -9,7 +9,7 @@ append .row-fluid
           dt Territories
           dd 
             each territory in result.availability
-              a(href="?limit-territory=#{territory}") #{territory}
+              a(href="?limit-territory=#{territory}", title="Limit results to #{territory}") #{territory}
               | 
     if result.image
       .span2
