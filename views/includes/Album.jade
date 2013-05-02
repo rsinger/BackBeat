@@ -5,8 +5,12 @@ append .row-fluid
         dt album
         dd 
           a(href=result.url, target="_blank") #{result.name}
-          if result.availability
-            p #{result.availability}
+        if result.availability
+          dt Territories
+          dd 
+            each territory in result.availability
+              a(href="?limit-territory=#{territory}") #{territory}
+              | 
     if result.image
       .span2
         img(src=result.image, width=100, height=100)

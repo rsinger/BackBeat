@@ -17,6 +17,10 @@ block content
         label.checkbox
           input(type='checkbox', name='services-spotify', checked=(settings.services && settings.services.spotify))
           | Spotify
+        if (settings.services && settings.services.spotify && settings.services.spotify.territory)
+          label.checkbox
+            input(type='checkbox', name='limit-territory', checked=true)
+            | Limit Spotify to #{settings.services.spotify.territory}         
         button(type='submit').btn.btn-primary Save        
         
       

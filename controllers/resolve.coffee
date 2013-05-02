@@ -101,8 +101,9 @@ class Services
               album.key = result.href 
               album.name = result.name
               album.url = result.href
-              album.availability = result.availability.territories
-              results[artist.href].results.push album
+              album.availability = result.availability.territories.split(' ')
+              unless settings? and settings.territory? and (!(settings.territory in album.availability) && album.availability[0] isnt 'worldwide')
+                results[artist.href].results.push album
         else if query.type is 'track'
           for result in response.tracks
             for artist in result.artists
@@ -121,9 +122,10 @@ class Services
                 track.album.name = result.album.name      
                 track.album.key = result.album.href
                 track.album.url = result.album.href
-                track.album.availability = result.album.availability.territories
+                track.album.availability = result.album.availability.territories.split(' ')
                 track.album.date = result.album.released
-              results[artist.href].results.push track        
+              unless settings? && settings.territory? && track.album? && (!(settings.territory in track.album.availability) && track.album.availability[0] isnt 'worldwide')  
+                results[artist.href].results.push track        
         callback null, results        
       else 
         callback null, results
@@ -136,7 +138,7 @@ retrieveServicesForRequest = (request, settings, callback) ->
   serviceResponses = {}
   svcs = new Services
   async.forEach request.services, (service, svcCb) =>
-    svcs[service] request, settings[service], (err, svc_response) =>
+    svcs[service] request, settings.services[service], (err, svc_response) =>
       serviceResponses[service] = svc_response    
       svcCb null, service
   , (err) => callback null, serviceResponses
